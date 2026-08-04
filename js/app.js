@@ -10,8 +10,8 @@ $(document).ready(function () {
 });
 
 // --- BUG: unbounded array that grows forever and is never trimmed —
-// a classic memory leak. Every mousemove event pushes a new object and
-// nothing ever removes old ones, so retained memory climbs for as long
+  // a classic memory leak. Every mousemove event pushes a new object and
+  // nothing ever removes old ones, so retained memory climbs for as long
 // as the tab stays open.
 // const mouseTrail = [];
 // window.addEventListener('mousemove', function (e) {
@@ -28,16 +28,16 @@ window.addEventListener('mousemove', function(e){
 // initGallery() instead of once. Every window resize therefore adds
 // ANOTHER listener on top of all previous ones, so work done per-resize
 // grows over the life of the page (also a leak).
-function initGallery() {
-  window.addEventListener('resize', function () {
-    document.querySelectorAll('.product-card').forEach(function (card) {
-      // no-op-ish work, but multiplied by (leaked listener count) it adds up
-      card.style.transform = 'translateZ(0)';
-    });
-  });
-}
-initGallery();
-document.addEventListener('DOMContentLoaded', initGallery); // called again -> compounds the leak
+// function initGallery() {
+//   window.addEventListener('resize', function () {
+//     document.querySelectorAll('.product-card').forEach(function (card) {
+//       // no-op-ish work, but multiplied by (leaked listener count) it adds up
+//       card.style.transform = 'translateZ(0)';
+//     });
+//   });
+// }
+// initGallery();
+// document.addEventListener('DOMContentLoaded', initGallery); // called again -> compounds the leak
 
 // --- BUG: layout thrashing. For every card we read a layout property
 // (offsetHeight) and then immediately write a style, interleaved, forcing
