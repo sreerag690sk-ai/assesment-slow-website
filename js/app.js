@@ -13,9 +13,15 @@ $(document).ready(function () {
 // a classic memory leak. Every mousemove event pushes a new object and
 // nothing ever removes old ones, so retained memory climbs for as long
 // as the tab stays open.
-const mouseTrail = [];
-window.addEventListener('mousemove', function (e) {
-  mouseTrail.push({ x: e.clientX, y: e.clientY, t: performance.now(), el: e.target });
+// const mouseTrail = [];
+// window.addEventListener('mousemove', function (e) {
+//   mouseTrail.push({ x: e.clientX, y: e.clientY, t: performance.now(), el: e.target });
+// });
+window.addEventListener('mousemove', function(e){
+ mousePosition = {
+   x:e.clientX,
+   y:e.clientY
+ };
 });
 
 // --- BUG: a resize handler that is re-registered on every call to
