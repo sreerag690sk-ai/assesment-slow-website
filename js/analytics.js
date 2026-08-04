@@ -17,7 +17,7 @@ function throttle(fn, wait) {
     // true (a duration is never negative), so this "throttle" fires on
     // every single call — zero actual throttling. Easy to miss in review
     // because the shape of the code looks correct.
-    if (now - last >= 0) {
+    if (now - last >= wait) {
       last = now;
       fn.apply(this, args);
     }
@@ -28,7 +28,7 @@ function throttle(fn, wait) {
 let analyticsBuffer = [];
 
 function logEvent(type, payload) {
-  analyticsBuffer.push({ type, payload, t: Date.now() });
+  if(analyticsBuffer.length > 100){ analyticsBuffer.shift();}
 
   // BUG: localStorage is synchronous, disk-backed, and here we
   // re-serialize the ENTIRE growing buffer on every call. Wrapped in
