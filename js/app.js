@@ -157,6 +157,6 @@ function startPerfHud() {
 
 window.addEventListener('load', function () {
   renderReviews();
-  startParticles();
+  // startParticles();
   startPerfHud();
 });
