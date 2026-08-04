@@ -57,11 +57,19 @@ window.addEventListener('mousemove', function(e){
 // --- BUG: blocking synchronous XHR on the main thread to fetch "reviews".
 // This freezes rendering/input until the (artificially slow) request
 // completes. Should be an async fetch().
-function loadReviewsSync() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'data/reviews.json', false); // false = synchronous
-  xhr.send(null);
-  return JSON.parse(xhr.responseText);
+// function loadReviewsSync() {
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'data/reviews.json', false); // false = synchronous
+//   xhr.send(null);
+//   return JSON.parse(xhr.responseText);
+// }
+
+async function loadReviews() {
+ const response = await fetch('data/reviews.json');
+ if (!response.ok) {
+  throw new Error('Failed to load reviews');
+ }
+ return await response.json();
 }
 
 // --- BUG: renders thousands of DOM nodes in one go with no pagination
