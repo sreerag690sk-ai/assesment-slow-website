@@ -75,17 +75,19 @@ async function loadReviews() {
 // --- BUG: renders thousands of DOM nodes in one go with no pagination
 // or virtualization, and does it with wasteful innerHTML += in a loop
 // (which re-parses the growing string every iteration).
-function renderReviews() {
-  const reviews = loadReviewsSync();
-  const list = document.getElementById('review-list');
-  let html = '';
-  for (let i = 0; i < reviews.length; i++) {
-    // innerHTML += re-serializes and re-parses the ENTIRE list every pass
-    html += '<div class="review-item"><strong>' + reviews[i].name +
-      '</strong> <span class="stars">' + '★'.repeat(reviews[i].rating) +
-      '</span><p>' + reviews[i].text + '</p></div>';
-    list.innerHTML = html;
-  }
+async function renderReviews() {
+ const reviews = await loadReviews();
+ const list = document.getElementById('review-list');
+ list.innerHTML = reviews
+   .slice(0,50)
+   .map(review=>`
+     <div class="review-item">
+       <strong>${review.name}</strong>
+       <span class="stars">${'★'.repeat(review.rating)}</span>
+       <p>${review.text}</p>
+     </div>
+   `)
+   .join('');
 }
 
 // --- BUG: canvas "particle" background animated with setInterval at an
