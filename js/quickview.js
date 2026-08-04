@@ -14,7 +14,8 @@
 // It's invisible in the DOM inspector (the nodes aren't in the tree)
 // and invisible in normal use (nothing breaks) — only a heap snapshot
 // diff between two "open + close" cycles reveals it.
-const closedModalHistory = [];
+// const closedModalHistory = [];
+closedModalHistory.push(overlay);
 
 function openQuickView(card) {
   const name = card.querySelector('h3').textContent;
@@ -39,11 +40,11 @@ function openQuickView(card) {
   // Open/close a few times and every past overlay's listener is still
   // live, still running its full logic on every future click anywhere
   // on the page.
-  document.addEventListener('click', function outsideClickHandler(e) {
-    if (e.target === overlay) {
-      closeQuickView(overlay);
-    }
-  });
+ overlay.addEventListener('click', function(e){
+ if(e.target === overlay){
+   closeQuickView(overlay);
+ }
+});
 
   overlay.querySelector('.quickview-close').addEventListener('click', function () {
     closeQuickView(overlay);
