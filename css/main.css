@@ -5,7 +5,7 @@
 /* Blocking @import pulls in a full unused "kitchen sink" framework
    AFTER the browser has already started parsing this file — this
    delays first paint until the whole chain resolves. */
-@import url('vendor-framework.css');
+/* @import url('vendor-framework.css'); */
 
 :root {
   --brand-dark: #16241f;
