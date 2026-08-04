@@ -43,16 +43,16 @@ window.addEventListener('mousemove', function(e){
 // (offsetHeight) and then immediately write a style, interleaved, forcing
 // the browser to recalculate layout on every single iteration instead of
 // batching all reads then all writes.
-function equalizeCardHeights() {
-  const cards = document.querySelectorAll('.product-card');
-  cards.forEach(function (card) {
-    const h = card.offsetHeight;           // READ (forces layout)
-    card.style.minHeight = h + 2 + 'px';   // WRITE
-    const h2 = card.offsetHeight;          // READ again (forces layout again)
-    card.querySelector('.info').style.paddingTop = (h2 % 5) + 'px'; // WRITE
-  });
-}
-window.addEventListener('scroll', equalizeCardHeights); // no throttling/debouncing at all
+// function equalizeCardHeights() {
+//   const cards = document.querySelectorAll('.product-card');
+//   cards.forEach(function (card) {
+//     const h = card.offsetHeight;           // READ (forces layout)
+//     card.style.minHeight = h + 2 + 'px';   // WRITE
+//     const h2 = card.offsetHeight;          // READ again (forces layout again)
+//     card.querySelector('.info').style.paddingTop = (h2 % 5) + 'px'; // WRITE
+//   });
+// }
+// window.addEventListener('scroll', equalizeCardHeights); // no throttling/debouncing at all
 
 // --- BUG: blocking synchronous XHR on the main thread to fetch "reviews".
 // This freezes rendering/input until the (artificially slow) request
