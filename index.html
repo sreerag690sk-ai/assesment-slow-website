@@ -9,16 +9,23 @@
   <link rel="stylesheet" href="css/fonts.css">
 
   <!-- "Just in case" legacy support check. -->
-  <script>
+  <!-- <script>
     // BUG: the intended check was `!window.Promise`. The stray `|| true`
     // (left over from a debugging session, per the commit that added
     // it) means this is unconditionally true, so the ~165KB legacy
     // polyfill bundle is downloaded and executed in every browser,
     // modern or not. document.write() here also blocks the parser.
     if (!window.Promise || true) {
-      document.write('<script src="js/vendor/legacy-polyfill.js"><\/script>');
+      document.write('<script src="js/vendor/legacy-polyfill.js"><\/script>');  
     }
-  </script>
+  </script> -->
+  <script>
+if (!window.Promise) {
+  const script = document.createElement('script');
+  script.src = 'js/vendor/legacy-polyfill.js';
+  document.head.appendChild(script);
+}
+</script>
 
   <!-- BUG: jQuery included TWICE under different filenames (same bytes) -->
   <script src="js/vendor/jquery-3.6.0.min.js"></script>
