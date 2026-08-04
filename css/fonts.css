@@ -45,7 +45,7 @@
   overflow: hidden;
   visibility: hidden;
 }
-.font-preload span:nth-child(1) { font-family: 'TrailSans'; font-weight: 100; }
+/* .font-preload span:nth-child(1) { font-family: 'TrailSans'; font-weight: 100; }
 .font-preload span:nth-child(2) { font-family: 'TrailSans'; font-weight: 300; }
 .font-preload span:nth-child(3) { font-family: 'TrailSans'; font-weight: 500; }
-.font-preload span:nth-child(4) { font-family: 'TrailSans'; font-weight: 900; }
+.font-preload span:nth-child(4) { font-family: 'TrailSans'; font-weight: 900; } */
